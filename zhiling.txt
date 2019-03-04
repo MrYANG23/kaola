@@ -1,0 +1,77 @@
+python main.py /home/yh/下载/FlyingChairs_release/data -b8 -j8 -a flownets
+python main.py /home/yh/下载/data_stereo_flow/training/flow_occ -b8 -j8 -a flownets
+python main.py /home/yh/下载/data_stereo_flow/training -b8 -j8 -a flownets --dataset KITTI_occ
+
+python main.py /home/yh/下载/FlyingChairs_release/data -b4 -j1 -a flownets 
+watch -n 10 nvidia-smi
+
+
+python main.py --batch_size 8 --model FlowNet2 --loss=L1Loss --optimizer=Adam --optimizer_lr=1e-4 \
+--training_dataset MpiSintelFinal --training_dataset_root /home/yh/下载/MPI-Sintel-complete/training/final \
+--validation_dataset MpiSintelClean --validation_dataset_root /home/yh/下载/MPI-Sintel-complete/training/clean
+
+
+python run_inference.py /home/yh/下载/MPI-Sintel-complete/training/clean/alley_1 /home/yh/PycharmProjects/FlowNetPytorch-master/mpi_sintel_clean/11-23-11:54/flownetc,adam,300epochs,epochSize1000,b8,lr0.0001/checkpoint.pth.tar
+
+
+/home/liubowen/MPI-Sintel-complete
+/home/liubowen/MPI-Sintel-complete/training
+
+python main.py /home/liubowen/MPI-Sintel-complete/training -b8 -j8 -a flownets --dataset mpi_sintel_clean
+
+python main.py /home/yh/下载/MPI-Sintel-complete/training -b8 -j8 -a flownets --dataset mpi_sintel_clean
+CD
+
+/home/liubowen/FlyingChairs_release/data
+
+python main.py /home/liubowen/FlyingChairs_release/data -b8 -j8 -a flownets
+
+python3.6 main.py /home/liubowen/MPI-Sintel-complete/training -b8 -j8 -a flownets --dataset mpi_sintel_clean
+
+
+sudo apt-get install nvidia-410 nvidia-settings
+
+
+
+inference
+"""""""""""""""""""""""""""""""""""""""""""""""""
+python run_inference.py /home/yh/下载/MPI-Sintel-complete/training/final/ambush_5 /home/yh/PycharmProjects/FlowNetPytorch-master/flying_chairs/11-29-15:04/flownets,adam,300epochs,epochSize1000,b8,lr0.0001/model_best.pth.tar
+
+
+
+flownet2.0
+"""""""""""""""""""""""""""""""""""""""''
+python main.py --batch_size 4 --model FlowNet2 --loss=L1Loss --optimizer=Adam --optimizer_lr=1e-4 \
+--training_dataset MpiSintelFinal --training_dataset_root /home/yh/下载/MPI-Sintel-complete/training/  \
+--validation_dataset MpiSintelClean --validation_dataset_root /home/yh/下载/MPI-Sintel-complete/training/
+
+
+python main.py --batch_size 4 --model FlowNet2C --loss=L1Loss --optimizer=Adam --optimizer_lr=1e-4 \
+--training_dataset MpiSintelFinal --training_dataset_root /home/yh/下载/MPI-Sintel-complete/training/  \
+--validation_dataset MpiSintelClean --validation_dataset_root /home/yh/下载/MPI-Sintel-complete/training/
+
+
+python main.py --batch_size 4 --model FlowNet2C --loss=L1Loss --optimizer=Adam --optimizer_lr=1e-4 \
+--training_dataset FlyingChairs --training_dataset_root /home/yh/下载/FlyingChairs_release/data  \
+--validation_dataset MpiSintelClean --validation_dataset_root /home/yh/下载/MPI-Sintel-complete/training/
+
+
+''''''''''''''''''''''''''''''''''''
+Could you run this command that runs flownetc, and see if you get the same error?
+python main.py --batch_size 8 --model FlowNet2C --optimizer=Adam --optimizer_lr=1e-4 --loss=MultiScale --loss_norm=L1 --loss_numScales=5 --loss_startScale=4 --optimizer_lr=1e-4 --crop_size 384 512 --training_dataset FlyingChairs --training_dataset_root /home/yh/下载/FlyingChairs_release/data  --validation_dataset MpiSintelClean --validation_dataset_root /home/yh/下载/MPI-Sintel-complete/training/
+
+
+python main.py --batch_size 8 --model FlowNet2C --optimizer=Adam --optimizer_lr=1e-4 --loss=MultiScale --loss_norm=L1
+--loss_numScales=5 --loss_startScale=4 --optimizer_lr=1e-4 --crop_size 384 512
+--training_dataset FlyingChairs --training_dataset_root /home/yh/下载/FlyingChairs_release/data
+--validation_dataset MpiSintelClean --validation_dataset_root /home/yh/下载/MPI-Sintel-complete/training/
+
+
+Siamese RPN训练指令
+python bin/create_lmdb.py --data-dir /home/yh/shujuji/ILSVRC2015_VID/new_finntune --output-dir /home/yh/shujuji/ILSVRC2015_VID/new_finntune.lmdb
+
+
+服务器我的 数据集存放路径/mnt/disk/yanghan
+
+
+
